@@ -5,9 +5,9 @@ require 'numeral_converter'
 require_relative 'support/test_helper'
 
 describe NumeralConverter do
-  describe '#from_hindu_arabic_to_roman' do
-    subject { NumeralConverter }
+  subject { NumeralConverter }
 
+  describe '#from_hindu_arabic_to_roman' do
     describe 'when invalid numerals' do
       let(:invalid_result) { 'Invalid Hindu-Arabic Numerals' }
 
@@ -41,7 +41,7 @@ describe NumeralConverter do
       end
     end
 
-    describe 'when success' do
+    describe 'when valid numerals' do
       it { expect(subject.from_hindu_arabic_to_roman('1')).must_equal('I') }
       it { expect(subject.from_hindu_arabic_to_roman('2')).must_equal('II') }
       it { expect(subject.from_hindu_arabic_to_roman('3')).must_equal('III') }
@@ -90,6 +90,85 @@ describe NumeralConverter do
       it { expect(subject.from_hindu_arabic_to_roman('3000')).must_equal('MMM') }
       it { expect(subject.from_hindu_arabic_to_roman('3333')).must_equal('MMMCCCXXXIII') }
       it { expect(subject.from_hindu_arabic_to_roman('3999')).must_equal('MMMCMXCIX') }
+    end
+  end
+
+  describe '#from_roman_to_hindu_arabic' do
+    describe 'when invalid numerals' do
+      let(:invalid_result) { 'Invalid Roman Numerals' }
+
+      it 'return error message when Roman numerals is nil' do
+        expect(subject.from_roman_to_hindu_arabic(nil)).must_equal(invalid_result)
+      end
+
+      it 'return error message when Roman numerals is empty' do
+        expect(subject.from_roman_to_hindu_arabic('')).must_equal(invalid_result)
+      end
+
+      it 'return error message when Roman numerals is bigger then MMMCMXCIX' do
+        expect(subject.from_roman_to_hindu_arabic('MMMM')).must_equal(invalid_result)
+      end
+
+      it 'return error message when Roman numerals is "negative"' do
+        expect(subject.from_roman_to_hindu_arabic('-I')).must_equal(invalid_result)
+      end
+
+      it 'return error message when Roman numerals has invalid characters' do
+        expect(subject.from_roman_to_hindu_arabic('1')).must_equal(invalid_result)
+        expect(subject.from_roman_to_hindu_arabic('a')).must_equal(invalid_result)
+        expect(subject.from_roman_to_hindu_arabic('i')).must_equal(invalid_result)
+      end
+    end
+
+    describe 'when valid numerals' do
+      it { expect(subject.from_roman_to_hindu_arabic('I')).must_equal(1) }
+      it { expect(subject.from_roman_to_hindu_arabic('II')).must_equal(2) }
+      it { expect(subject.from_roman_to_hindu_arabic('III')).must_equal(3) }
+      it { expect(subject.from_roman_to_hindu_arabic('IV')).must_equal(4) }
+      it { expect(subject.from_roman_to_hindu_arabic('V')).must_equal(5) }
+      it { expect(subject.from_roman_to_hindu_arabic('VI')).must_equal(6) }
+      it { expect(subject.from_roman_to_hindu_arabic('VII')).must_equal(7) }
+      it { expect(subject.from_roman_to_hindu_arabic('VIII')).must_equal(8) }
+      it { expect(subject.from_roman_to_hindu_arabic('IX')).must_equal(9) }
+      it { expect(subject.from_roman_to_hindu_arabic('X')).must_equal(10) }
+      it { expect(subject.from_roman_to_hindu_arabic('XI')).must_equal(11) }
+      it { expect(subject.from_roman_to_hindu_arabic('XII')).must_equal(12) }
+      it { expect(subject.from_roman_to_hindu_arabic('XIII')).must_equal(13) }
+      it { expect(subject.from_roman_to_hindu_arabic('XIV')).must_equal(14) }
+      it { expect(subject.from_roman_to_hindu_arabic('XV')).must_equal(15) }
+      it { expect(subject.from_roman_to_hindu_arabic('XVI')).must_equal(16) }
+      it { expect(subject.from_roman_to_hindu_arabic('XVII')).must_equal(17) }
+      it { expect(subject.from_roman_to_hindu_arabic('XVIII')).must_equal(18) }
+      it { expect(subject.from_roman_to_hindu_arabic('XIX')).must_equal(19) }
+      it { expect(subject.from_roman_to_hindu_arabic('XX')).must_equal(20) }
+      it { expect(subject.from_roman_to_hindu_arabic('XXI')).must_equal(21) }
+      it { expect(subject.from_roman_to_hindu_arabic('XXX')).must_equal(30) }
+      it { expect(subject.from_roman_to_hindu_arabic('XL')).must_equal(40) }
+      it { expect(subject.from_roman_to_hindu_arabic('L')).must_equal(50) }
+      it { expect(subject.from_roman_to_hindu_arabic('LX')).must_equal(60) }
+      it { expect(subject.from_roman_to_hindu_arabic('LXX')).must_equal(70) }
+      it { expect(subject.from_roman_to_hindu_arabic('LXXX')).must_equal(80) }
+      it { expect(subject.from_roman_to_hindu_arabic('XC')).must_equal(90) }
+      it { expect(subject.from_roman_to_hindu_arabic('XCVIII')).must_equal(98) }
+      it { expect(subject.from_roman_to_hindu_arabic('XCIX')).must_equal(99) }
+      it { expect(subject.from_roman_to_hindu_arabic('C')).must_equal(100) }
+      it { expect(subject.from_roman_to_hindu_arabic('CI')).must_equal(101) }
+      it { expect(subject.from_roman_to_hindu_arabic('CC')).must_equal(200) }
+      it { expect(subject.from_roman_to_hindu_arabic('CCC')).must_equal(300) }
+      it { expect(subject.from_roman_to_hindu_arabic('CD')).must_equal(400) }
+      it { expect(subject.from_roman_to_hindu_arabic('D')).must_equal(500) }
+      it { expect(subject.from_roman_to_hindu_arabic('DC')).must_equal(600) }
+      it { expect(subject.from_roman_to_hindu_arabic('DCC')).must_equal(700) }
+      it { expect(subject.from_roman_to_hindu_arabic('DCCC')).must_equal(800) }
+      it { expect(subject.from_roman_to_hindu_arabic('CM')).must_equal(900) }
+      it { expect(subject.from_roman_to_hindu_arabic('CMXCVIII')).must_equal(998) }
+      it { expect(subject.from_roman_to_hindu_arabic('CMXCIX')).must_equal(999) }
+      it { expect(subject.from_roman_to_hindu_arabic('M')).must_equal(1000) }
+      it { expect(subject.from_roman_to_hindu_arabic('MI')).must_equal(1001) }
+      it { expect(subject.from_roman_to_hindu_arabic('MM')).must_equal(2000) }
+      it { expect(subject.from_roman_to_hindu_arabic('MMM')).must_equal(3000) }
+      it { expect(subject.from_roman_to_hindu_arabic('MMMCCCXXXIII')).must_equal(3333) }
+      it { expect(subject.from_roman_to_hindu_arabic('MMMCMXCIX')).must_equal(3999) }
     end
   end
 end

@@ -14,6 +14,16 @@ module NumeralConverter
       end
     end
 
+    def from_roman_to_hindu_arabic(numerals)
+      return invalid_roman_message if numerals.nil? || numerals.empty?
+
+      numbers = numerals.strip.match(roman_regex)
+
+      return invalid_roman_message if numbers.nil?
+
+      convert_to_hindu_arabic(numbers)
+    end
+
     private
 
     def convert_to_roman(number)
@@ -50,6 +60,46 @@ module NumeralConverter
 
     def invalid_hindu_arabic_message
       'Invalid Hindu-Arabic Numerals'
+    end
+
+    def convert_to_hindu_arabic(numbers)
+      [
+        [numbers[:thousands], 'M', nil, 1000],
+        [numbers[:hundreds],  'C', 'D', 100],
+        [numbers[:tens],      'X', 'L', 10],
+        [numbers[:unit],      'I', 'V', 1]
+      ].reduce(0) do |sum, numeral|
+        sum + build_hindu_arabic_digit(numeral[0], numeral[1], numeral[2]) * numeral[3]
+      end
+    end
+
+    def roman_regex
+      %r{
+        ^
+        (?<thousands>M{0,3})
+        (?<hundreds>C[MD]|D?C{0,3})
+        (?<tens>X[CL]|L?X{0,3})
+        (?<unit>I[XV]|V?I{0,3})
+        $
+      }x
+    end
+
+    def build_hindu_arabic_digit(roman_number, one, five = nil)
+      if roman_number.empty?
+        0
+      elsif roman_number.match(/^#{one}{1,3}$/)
+        roman_number.size
+      elsif roman_number == "#{one}#{five}"
+        4
+      elsif roman_number.match(/^#{five}#{one}{0,3}$/)
+        roman_number.size + 4
+      else
+        9
+      end
+    end
+
+    def invalid_roman_message
+      'Invalid Roman Numerals'
     end
   end
 end
