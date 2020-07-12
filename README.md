@@ -4,7 +4,7 @@
 
 Eu escolhi o problema da [transformação de números romanos](http://codingdojo.org/kata/RomanNumerals/). O desafio foi feito na linguagem **Ruby** e com o framework de testes **Minitest**. A versão do Ruby usada foi a *2.7.1* e eu também testei nas versões *2.5.8* e *2.6.6*.
 
-Na parte I, converter números em algarismos romanos, foi resolvida quebrando o número de entrada em um array de dígitos, onde cada dígito representa uma parte do número (as ordens e classes numéricas). Cada dígito é convertido de forma individual, levando em consideração o seu valor e ordem numérica. Após as transformações, os números romanos são juntados, resultando na versão romana do número de entrada.
+A parte I, converter números em algarismos romanos, foi resolvida quebrando o número de entrada em um array de dígitos, onde cada dígito representa uma parte do número (as ordens e classes numéricas). Cada dígito é convertido de forma individual, levando em consideração o seu valor e ordem numérica. Após as transformações, os números romanos são juntados, resultando na versão romana do número de entrada.
 
 Já na parte II do problema, converter algarismos romanos em algarismos hindu-arábicos, foi usada uma expressão regular que valida o número e extrai as partes que representam um único numeral. Estas partes são convertidas para números inteiros de acordo com o valor. Após cada parte ser convertida em números, estas são multiplicadas por um valor representado sua ordem numérica (por exemplo, se a parte do número for da ordem das dezenas, o valor é multiplicado por 10) e depois são somadas para formar a representação hindo-arábico do número de entrada.
 
@@ -13,7 +13,7 @@ Em ambas as partes do problema o valor de entrada foi restringido (e é validado
 * Não é permitido entradas nulas ou vazias;
 * Não é permitido valores menores que 1 (**I** em romano);
 * Não é permitido valores maiores que 3999 (**MMMCMXCIX** em romano);
-* Os numerais hindu-arábico são representados com números inteiros;
+* Os numerais hindu-arábicos são representados com números inteiros;
 * Os numerais romanos são representados com Strings e só aceitam as letras maiúsculas.
 
 ## Instruções
