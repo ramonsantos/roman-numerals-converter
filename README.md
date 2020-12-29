@@ -1,5 +1,8 @@
 # Desafio Backend Zenvia Mobile
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+![ruby](https://img.shields.io/badge/ruby-2.7.2-dc143c)
+
 ## Problema
 
 Eu escolhi o problema da [transformação de números romanos](http://codingdojo.org/kata/RomanNumerals/). O desafio foi feito na linguagem **Ruby** e com o framework de testes **Minitest**. A versão do Ruby usada foi a *2.7.1* e eu também testei nas versões *2.5.8* e *2.6.6*.
@@ -27,14 +30,14 @@ Em ambas as partes do problema o valor de entrada foi restringido (e é validado
 #### Clonar o projeto:
 
 ``` bash
-git clone https://github.com/ramonsantos/roman_numerals.git
+git clone https://github.com/ramonsantos/roman-numerals-converter.git
 
 ```
 
 #### Entrar no diretório do projeto:
 
 ``` bash
-cd roman_numerals
+cd roman-numerals-converter
 ```
 
 #### Instalar as dependências:
